@@ -1,0 +1,45 @@
+/**
+ * jQuery plugin to support inline text input autocomplete
+ * 
+ * Author         Russell Brown
+ * Email          russ@RussBrownDevelopment.com
+ * Website        http://www.RussBrownDevelopment.com
+ * Project Site   https://code.google.com/p/jquery-rb-autocomplete
+ * 
+ * Notification of tweaks, improvements, additions and bugs is always appreciated.
+ * 
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ * This project is licensed under GNU General Public License V3
+ * 
+ */
+
+.rb_autocomplete_wrapper .rb_autocomplete_dropdown {
+    margin-left: 15px;
+    position: absolute;
+}
+
+.rb_autocomplete_wrapper input.processing {
+    background: #FFF url('loading.gif') no-repeat top right; 
+}
+
+.rb_autocomplete_wrapper .rb_autocomplete_dropdown ul {
+    width: 350px;
+    background-color: #B1B1B1;
+    padding: 0;
+    margin: 5px 0;
+}
+
+.rb_autocomplete_wrapper .rb_autocomplete_dropdown li {
+    list-style: none;
+    padding: 0 10px;
+    margin: 0;
+    border-bottom: 1px solid #CBCBCB;
+}
+
+.rb_autocomplete_wrapper .rb_autocomplete_dropdown li.hover {
+    cursor: pointer;
+    background-color: #CBCBCB;
+}
+
+.rb_autocomplete_wrapper .rb_autocomplete_dropdown span {
+}

@@ -1,0 +1,31 @@
+<project name="js-lib-compressor" default="compress" basedir=".">
+
+    <target name="compress">
+		<echo message="Compressing AutoComplete Source Files" />
+
+        <path id="lib.path">
+            <fileset dir="./" includes="*.jar"/>
+        </path>
+
+        <typedef 
+            name="yui-compressor" 
+            classpathref="lib.path" 
+            loaderref="lib.path.loader"
+            classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask" 
+        />
+
+        <!-- invoke compressor -->
+        <yui-compressor warn="false" charset="UTF-8" fromdir="../src" todir="../bin" cssSuffix=".css" jsSuffix=".js">
+            <include name="**/*.js" />
+            <include name="**/*.css" />
+        </yui-compressor>
+
+		<copy todir="../bin">
+			<fileset dir="../src">
+				 <exclude name="**/*.js" />
+				 <exclude name="**/*.css" />
+			</fileset>
+		</copy>
+    </target>
+
+</project>

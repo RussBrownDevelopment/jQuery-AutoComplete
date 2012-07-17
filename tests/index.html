@@ -1,0 +1,116 @@
+﻿<!--
+ * jQuery plugin to support inline text input autocomplete
+ * 
+ * Author         Russell Brown
+ * Email          russ@RussBrownDevelopment.com
+ * Website        http://www.RussBrownDevelopment.com
+ * Project Site   https://code.google.com/p/jquery-rb-autocomplete
+ * 
+ * Notification of tweaks, improvements, additions and bugs is always appreciated.
+ * 
+ * http://www.gnu.org/licenses/gpl-3.0.txt
+ * This project is licensed under GNU General Public License V3
+ * 
+ -->
+
+
+<html>
+<head>
+    <title>Example Usage of rbdAutoComplete Plugin</title>
+    
+    <script src="../lib/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="./data.js" type="text/javascript"></script>
+
+	<script type="text/javascript" language="JavaScript" src="../src/rbdAutoComplete.js"></script>
+	<link rel="stylesheet" href="../src/rbdAutoComplete.css" type="text/css" media="all" />
+</head>
+<body>
+
+    <form action="#">
+        <table>
+            <tr>
+                <td>Static Array</td>
+                <td><input type="text" id="ui_example1" name="ui_example1" value="" /></td>
+            </tr>
+            <tr>
+                <td>Static Array of Objects</td>
+                <td><input type="text" id="ui_example2" name="ui_example2" value="" /></td>
+            </tr>
+            <tr>
+                <td>3 chr start limit</td>
+                <td><input type="text" id="ui_example3" name="ui_example3" value="" /></td>
+            </tr>
+            <tr>
+                <td>1 chr start limit, adv formating</td>
+                <td><input type="text" id="ui_example4" name="ui_example4" value="" /></td>
+            </tr>
+            <tr>
+                <td>Server Side Rendered Display</td>
+                <td><input type="text" id="ui_example5" name="ui_example5" value="" /></td>
+            </tr>
+        </table>
+    </form>
+	
+	<br clear="all" /><br clear="all" />
+	<div id="debugOutput" style="display: inline-table; border: 1px solid #666; padding: 15px;">Welcome to the rbdAutoComplete plugin for jQuery Demo.</div>
+
+	<script language="javascript">
+		$(window).load(function () {
+		    var i = 0;
+            $( "#ui_example1" ).val("");
+            $( "#ui_example2" ).val("");
+            $( "#ui_example3" ).val("");
+            $( "#ui_example4" ).val("");
+            $( "#ui_example5" ).val("");
+
+            $( "#ui_example1" ).rbdAutoComplete({
+                source: userArray,
+                minChars: 1
+            });
+
+            $( "#ui_example2" ).rbdAutoComplete({
+                source: userObjsArray,
+                valueColumn: "USERNAME",
+                suggestionRow: "FIRSTNAME (USERNAME)",
+                minChars: 1
+            });
+
+            $( "#ui_example3" ).rbdAutoComplete({
+                source: "./json.data.txt",
+				remoteSourceStatic: true,
+                valueColumn: "USERNAME",
+                suggestionRow: "USERNAME",
+                minChars: 3
+            });
+
+            $( "#ui_example4" ).rbdAutoComplete({
+                source: "./json.data.txt",
+				remoteSourceStatic: true,
+                valueColumn: "USERNAME",
+                suggestionRow: "FIRSTNAME LASTNAME (USERNAME)",
+                minChars: 1,
+				onSelect: function (selectedObj) {
+					console.log(selectedObj);
+					var msg = "Selected Item:<ol>";
+					$.each( selectedObj, function( index, value ) {
+						msg += "<li>" + index + ": " + value + "</li>";
+					} );
+
+					$("#debugOutput").html(msg + "</ol>");
+				},
+				onSuggest: function (aSuggestions) {
+					$("#debugOutput").html("I made" + aSuggestions.length + " Suggestions, I rock!");
+				}
+            });
+
+            $( "#ui_example5" ).rbdAutoComplete({
+                source: userObjsRenArray,
+                valueColumn: "USERNAME",
+                displayColumn: "autoCompleteDisplay",
+                minChars: 1
+            });
+		});
+	</script>
+	
+</body>
+</html>
